@@ -1,4 +1,5 @@
 #include <bx/allocator.h>
+#include <jx/sys.h>
 
 namespace jtl
 {
@@ -8,8 +9,16 @@ namespace jtl
 // TODO: Configurable default allocator.
 bx::AllocatorI* getDefaultAllocator()
 {
+	// NOTE: Can't do that at the moment because there are global static variables 
+	// which require an allocator before jx::initSystem() is called.
+	// TODO: Remove those global statics.
+#if 1
 	static bx::DefaultAllocator defaultAllocator;
 	return &defaultAllocator;
+#else
+	static bx::AllocatorI* allocator = jx::createAllocator("jtl");
+	return allocator;
+#endif
 }
 
 uint32_t fnv1a(const void* buffer, uint32_t len)
