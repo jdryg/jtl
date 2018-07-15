@@ -22,7 +22,7 @@ public:
 
 	struct iterator
 	{
-		this_type* m_HashMap;
+		const this_type* m_HashMap;
 		uint32_t m_BucketID;
 
 		iterator()
@@ -31,7 +31,7 @@ public:
 		{
 		}
 
-		iterator(this_type* parent, uint32_t bucketID)
+		iterator(const this_type* parent, uint32_t bucketID)
 			: m_HashMap(parent)
 			, m_BucketID(bucketID)
 		{
@@ -66,13 +66,13 @@ public:
 	~hash_map();
 
 	iterator begin();
-	iterator end();
+	iterator end() const;
 	bool empty() const;
 
 	void insert(const pair<KeyT, ValueT>& pair);
 	iterator erase(iterator& it);
 
-	iterator find(const KeyT& key);
+	iterator find(const KeyT& key) const;
 
 	void clear();
 	void reserve(uint32_t n);
@@ -124,7 +124,7 @@ inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<Ke
 }
 
 template<typename KeyT, typename ValueT, GetAllocatorFunc A, typename HasherT, typename EqualT>
-inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<KeyT, ValueT, A, HasherT, EqualT>::end()
+inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<KeyT, ValueT, A, HasherT, EqualT>::end() const
 {
 	return iterator(this, m_NumBuckets);
 }
@@ -159,7 +159,7 @@ inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<Ke
 }
 
 template<typename KeyT, typename ValueT, GetAllocatorFunc A, typename HasherT, typename EqualT>
-inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<KeyT, ValueT, A, HasherT, EqualT>::find(const KeyT& key)
+inline typename hash_map<KeyT, ValueT, A, HasherT, EqualT>::iterator hash_map<KeyT, ValueT, A, HasherT, EqualT>::find(const KeyT& key) const
 {
 	if (empty()) {
 		return end();
