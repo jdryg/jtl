@@ -65,8 +65,8 @@ public:
 	void swap(shared_ptr<T>& other);
 
 protected:
-	template <typename T>
-	friend void allocate_shared_helper(shared_ptr<T>&, RefCount<T>*, T*);
+	template <typename R>
+	friend void allocate_shared_helper(shared_ptr<R>&, RefCount<R>*, R*);
 
 	T* m_Value;
 	RefCount<T>* m_RefCount;
@@ -157,8 +157,8 @@ inline void shared_ptr<T>::swap(shared_ptr<T>& other)
 	m_RefCount = refCount;
 }
 
-template <typename T>
-inline void allocate_shared_helper(shared_ptr<T>& sharedPtr, RefCount<T>* refCount, T* value)
+template <typename R>
+inline void allocate_shared_helper(shared_ptr<R>& sharedPtr, RefCount<R>* refCount, R* value)
 {
 	sharedPtr.m_RefCount = refCount;
 	sharedPtr.m_Value = value;

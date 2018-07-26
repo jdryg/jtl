@@ -135,7 +135,7 @@ inline char& string::operator[](uint32_t index)
 	return m_String[index];
 }
 
-inline typename string& string::operator = (const string& other)
+inline string& string::operator = (const string& other)
 {
 	resize(0);
 	assign(other.c_str(), other.size());
@@ -255,7 +255,7 @@ inline void string::sprintf(const char* fmt, ...)
 	va_end(args);
 }
 
-inline typename string string::substr(uint32_t first, uint32_t last) const
+inline string string::substr(uint32_t first, uint32_t last) const
 {
 	JTL_CHECK(first < m_Size, "Invalid index (first)");
 	JTL_CHECK(last <= m_Size, "Invalid index (last)");

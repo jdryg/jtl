@@ -254,7 +254,6 @@ inline typename vector<T, A>::iterator vector<T, A>::erase(typename vector<T, A>
 		if (std::is_trivially_destructible<T>::value && std::is_trivially_copyable<T>::value) {
 			bx::memMove(&m_Items[index], &m_Items[index + 1], sizeof(T) * numItemsInFront);
 		} else {
-			const uint32_t n = m_Size - 1;
 			T* dst = &m_Items[index];
 			T* src = &m_Items[index + 1];
 			for (uint32_t i = 0; i < numItemsInFront; ++i) {
@@ -309,7 +308,6 @@ inline typename vector<T, A>::iterator vector<T, A>::erase(typename vector<T, A>
 
 		// Destruct all remaining items.
 		const uint32_t destructStart = firstIndex + (m_Size - lastIndex);
-		const uint32_t numDestruct = m_Size - destructStart;
 		T* item = &m_Items[destructStart];
 		for (uint32_t i = destructStart; i < m_Size; ++i) {
 			item->~T();

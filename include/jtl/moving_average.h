@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <bx/bx.h>
+#include <bx/math.h>
 
 namespace jtl
 {

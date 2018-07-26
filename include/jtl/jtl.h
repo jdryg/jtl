@@ -2,7 +2,7 @@
 #define JTL_H
 
 #ifndef JTL_CONFIG_DEBUG
-#define JTL_CONFIG_DEBUG _DEBUG
+#define JTL_CONFIG_DEBUG 0
 #endif
 
 #if JTL_CONFIG_DEBUG
