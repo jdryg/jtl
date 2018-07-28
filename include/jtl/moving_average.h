@@ -65,6 +65,7 @@ void moving_average<T, N>::getBounds(T& minT, T& maxT)
 	if (m_Count == 0) {
 		minT = T(0);
 		maxT = T(0);
+		return;
 	}
 
 	minT = m_Data[0];
