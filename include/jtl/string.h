@@ -272,9 +272,9 @@ inline uint32_t string::find_last_of(const char* charSet) const
 	bool found = false;
 	uint32_t maxPos = 0;
 	for (uint32_t i = 0; i < numChars; ++i) {
-		const char* ptr = bx::strRFind(sv, charSet[i]);
-		if (ptr != nullptr) {
-			const uint32_t pos = (uint32_t)(ptr - m_String);
+		bx::StringView ptr = bx::strRFind(sv, charSet[i]);
+		if (!ptr.isEmpty()) {
+			const uint32_t pos = (uint32_t)(ptr.getPtr() - m_String);
 			if (pos > maxPos) {
 				maxPos = pos;
 				found = true;
