@@ -8,8 +8,12 @@ namespace jtl
 // TODO: Configurable default allocator.
 bx::AllocatorI* getDefaultAllocator()
 {
-	static bx::DefaultAllocator defaultAllocator;
-	return &defaultAllocator;
+	static char buffer[sizeof(bx::DefaultAllocator)];
+	static bx::DefaultAllocator* defaultAllocator = nullptr;
+	if (!defaultAllocator) {
+		defaultAllocator = BX_PLACEMENT_NEW(buffer, bx::DefaultAllocator)();
+	}
+	return defaultAllocator;
 }
 
 uint32_t fnv1a(const void* buffer, uint32_t len)
